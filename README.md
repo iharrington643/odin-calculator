@@ -1,1 +1,1 @@
-# odin-calculator
+The goal of this project is to use all that I have learned about web development so far to construct a simple yet functional calculator website.
