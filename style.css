@@ -1,0 +1,13 @@
+.calculator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.calculator-box {
+    width: 500px;
+    height: 700px;
+    background-color: black;
+    border-radius: 12px;
+}
