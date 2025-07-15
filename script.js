@@ -64,7 +64,7 @@ function calculate() {
     } else {
         inputTextBox.textContent = String((operate(operand1, operand2, operator).toFixed(3)));
     }
-    
+
     operatorCount = 0;
 };
 
