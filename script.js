@@ -54,10 +54,16 @@ function operate(num1, num2, sign) {
 function calculate() {
     numCount = 0;
 
-    if (inputTextBox.textContent != "") {
+    if (inputTextBox.textContent !== "") {
         operand2 = parseInt(inputTextBox.textContent);
     } else {
         operand2 = 0;
+    };
+
+    if (!operator || operatorCount === 0) {
+        inputTextBox.textContent = String(operand2);
+        operand1 = operand2;
+        return;
     };
 
     if (Number.isInteger(operate(operand1, operand2, operator))) {
