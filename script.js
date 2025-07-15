@@ -16,12 +16,12 @@ const divideButton = document.getElementById('divide-button');
 const equalsButton = document.getElementById('equals-button');
 const clearButton = document.getElementById('clear-button');
 
-let numCount = 0;
-let operand1 = 0;
-let operand2 = 0;
+let operand1 = undefined;
+let operand2 = undefined;
 let operator = "";
 let operatorCount = 0;
-let repeatedOperator = false;
+let chainedOperators = false;
+let errorMessage = false;
 
 function add(num1, num2) {
     return num1 + num2;
@@ -36,7 +36,11 @@ function multiply(num1, num2) {
 };
 
 function divide(num1, num2) {
-    return num1 / num2;
+    if (num2 != 0) {
+        return num1 / num2;
+    } else {
+        return undefined;
+    };
 };
 
 function operate(num1, num2, sign) {
@@ -54,229 +58,288 @@ function operate(num1, num2, sign) {
 function calculate() {
     numCount = 0;
 
-    if (inputTextBox.textContent !== "") {
+    if (inputTextBox.textContent != '') {
         operand2 = parseInt(inputTextBox.textContent);
     } else {
-        operand2 = 0;
+        operand2 = undefined;
     };
-
-    if (!operator || operatorCount === 0) {
-        inputTextBox.textContent = String(operand2);
-        operand1 = operand2;
+    
+    if (operand1 == undefined) {
         return;
     };
 
     if (Number.isInteger(operate(operand1, operand2, operator))) {
         inputTextBox.textContent = String(operate(operand1, operand2, operator));
+    } else if (operate(operand1, operand2, operator) === undefined) {
+        inputTextBox.textContent = "Error: Cannot Divide by Zero";
+        inputTextBox.style.fontSize = "30px";
+        errorMessage = true;
+        operand1 = 0;
+        operand2 = 0;
+        operator = "";
+    } else if (Number.isNaN(operate(operand1, operand2, operator))) {
+        inputTextBox.textContent = "Error: Incomplete Equation";
+        inputTextBox.style.fontSize = "30px";
+        errorMessage = true;
+        operand1 = 0;
+        operand2 = 0;
+        operator = "";
     } else {
         inputTextBox.textContent = String((operate(operand1, operand2, operator).toFixed(3)));
     };
-
-    operatorCount = 0;
 };
 
 numberZeroButton.addEventListener('click', () => {
-    if (repeatedOperator == true) {
-        inputTextBox.textContent = '';
-        repeatedOperator = false;
-        numCount = 0;
-    }
+    inputTextBox.style.fontSize = "55px";
 
-    if (numCount < 10) {
-        inputTextBox.append('0');
-        numCount += 1;
+    if (chainedOperators == true) {
+        inputTextBox.textContent = '';
+        chainedOperators = false;
     };
+
+    if (errorMessage == true) {
+        inputTextBox.textContent = '';
+        errorMessage = false;
+    };
+
+    if (inputTextBox.textContent.length < 10) {
+        inputTextBox.append('0');
+    }
 });
 
 numberOneButton.addEventListener('click', () => {
-    if (repeatedOperator == true) {
-        inputTextBox.textContent = '';
-        repeatedOperator = false;
-        numCount = 0;
-    }
+    inputTextBox.style.fontSize = "55px";
 
-    if (numCount < 10) {
-        inputTextBox.append('1');
-        numCount += 1;
+    if (chainedOperators == true) {
+        inputTextBox.textContent = '';
+        chainedOperators = false;
     };
+
+    if (errorMessage == true) {
+        inputTextBox.textContent = '';
+        errorMessage = false;
+    };
+
+    if (inputTextBox.textContent.length < 10) {
+        inputTextBox.append('1');
+    }
 });
 
 numberTwoButton.addEventListener('click', () => {
-    if (repeatedOperator == true) {
-        inputTextBox.textContent('');
-        repeatedOperator = false;
-        numCount = 0;
-    }
+    inputTextBox.style.fontSize = "55px";
 
-    if (numCount < 10) {
-        inputTextBox.append('2');
-        numCount += 1;
+    if (chainedOperators == true) {
+        inputTextBox.textContent = '';
+        chainedOperators = false;
     };
+
+    if (errorMessage == true) {
+        inputTextBox.textContent = '';
+        errorMessage = false;
+    };
+
+    if (inputTextBox.textContent.length < 10) {
+        inputTextBox.append('2');
+    }
 });
 
 numberThreeButton.addEventListener('click', () => {
-    if (repeatedOperator == true) {
-        inputTextBox.textContent = '';
-        repeatedOperator = false;
-        numCount = 0;
-    }
+    inputTextBox.style.fontSize = "55px";
 
-    if (numCount < 10) {
-        inputTextBox.append('3');
-        numCount += 1;
+    if (chainedOperators == true) {
+        inputTextBox.textContent = '';
+        chainedOperators = false;
     };
+
+    if (errorMessage == true) {
+        inputTextBox.textContent = '';
+        errorMessage = false;
+    };
+
+    if (inputTextBox.textContent.length < 10) {
+        inputTextBox.append('3');
+    }
 });
 
 numberFourButton.addEventListener('click', () => {
-    if (repeatedOperator == true) {
-        inputTextBox.textContent = '';
-        repeatedOperator = false;
-        numCount = 0;
-    }
+    inputTextBox.style.fontSize = "55px";
 
-    if (numCount < 10) {
-        inputTextBox.append('4');
-        numCount += 1;
+    if (chainedOperators == true) {
+        inputTextBox.textContent = '';
+        chainedOperators = false;
     };
+
+    if (errorMessage == true) {
+        inputTextBox.textContent = '';
+        errorMessage = false;
+    };
+
+    if (inputTextBox.textContent.length < 10) {
+        inputTextBox.append('4');
+    }
 });
 
 numberFiveButton.addEventListener('click', () => {
-    if (repeatedOperator == true) {
-        inputTextBox.textContent = '';
-        repeatedOperator = false;
-        numCount = 0;
-    }
+    inputTextBox.style.fontSize = "55px";
 
-    if (numCount < 10) {
-        inputTextBox.append('5');
-        numCount += 1;
+    if (chainedOperators == true) {
+        inputTextBox.textContent = '';
+        chainedOperators = false;
     };
+
+    if (errorMessage == true) {
+        inputTextBox.textContent = '';
+        errorMessage = false;
+    };
+
+    if (inputTextBox.textContent.length < 10) {
+        inputTextBox.append('5');
+    }
 });
 
 numberSixButton.addEventListener('click', () => {
-    if (repeatedOperator == true) {
-        inputTextBox.textContent = '';
-        repeatedOperator = false;
-        numCount = 0;
-    }
+    inputTextBox.style.fontSize = "55px";
 
-    if (numCount < 10) {
-        inputTextBox.append('6');
-        numCount += 1;
+    if (chainedOperators == true) {
+        inputTextBox.textContent = '';
+        chainedOperators = false;
     };
+
+    if (errorMessage == true) {
+        inputTextBox.textContent = '';
+        errorMessage = false;
+    };
+
+    if (inputTextBox.textContent.length < 10) {
+        inputTextBox.append('6');
+    }
 });
 
 numberSevenButton.addEventListener('click', () => {
-    if (repeatedOperator == true) {
-        inputTextBox.textContent = '';
-        repeatedOperator = false;
-        numCount = 0;
-    }
+    inputTextBox.style.fontSize = "55px";
 
-    if (numCount < 10) {
+    if (chainedOperators == true) {
+        inputTextBox.textContent = '';
+        chainedOperators = false;
+    };
+
+    if (errorMessage == true) {
+        inputTextBox.textContent = '';
+        errorMessage = false;
+    };
+
+    if (inputTextBox.textContent.length < 10) {
         inputTextBox.append('7');
-        numCount += 1;
     };
 });
 
 numberEightButton.addEventListener('click', () => {
-    if (repeatedOperator == true) {
-        inputTextBox.textContent = '';
-        repeatedOperator = false;
-        numCount = 0;
-    }
+    inputTextBox.style.fontSize = "55px";
 
-    if (numCount < 10) {
-        inputTextBox.append('8');
-        numCount += 1;
+    if (chainedOperators == true) {
+        inputTextBox.textContent = '';
+        chainedOperators = false;
     };
+
+    if (inputTextBox.textContent.length < 10) {
+        inputTextBox.append('8');
+    }
 });
 
 numberNineButton.addEventListener('click', () => {
-    if (repeatedOperator == true) {
-        inputTextBox.textContent = '';
-        repeatedOperator = false;
-        numCount = 0;
-    }
+    inputTextBox.style.fontSize = "55px";
 
-    if (numCount < 10) {
-        inputTextBox.append('9');
-        numCount += 1;
+    if (chainedOperators == true) {
+        inputTextBox.textContent = '';
+        chainedOperators = false;
     };
+
+    if (errorMessage == true) {
+        inputTextBox.textContent = '';
+        errorMessage = false;
+    };
+
+    if (inputTextBox.textContent.length < 10) {
+        inputTextBox.append('9');
+    }
 });
 
 addButton.addEventListener('click', () => {
-    numCount = 0;
-
-    if (operatorCount < 1) {
-        operator = "+";
-
-        operand1 = parseInt(inputTextBox.textContent);
-        inputTextBox.textContent = '';
-        operatorCount += 1;
-    } else {
-        calculate();
-        operator = "+";
-        operand1 = parseInt(inputTextBox.textContent);
-        repeatedOperator = true;
-    }
+    if (errorMessage == false) {
+        if (operatorCount < 1) {
+            operator = "+";
+            operand1 = parseInt(inputTextBox.textContent);
+            inputTextBox.textContent = '';
+            operatorCount += 1;
+        } else {
+            calculate();
+            operator = "+";
+            operand1 = parseInt(inputTextBox.textContent);
+            chainedOperators = true;
+        };
+    };
 });
 
 subtractButton.addEventListener('click', () => {
-    numCount = 0;
-
-    if (operatorCount < 1) {
-        operator = "-";
-
-        operand1 = parseInt(inputTextBox.textContent);
-        inputTextBox.textContent = '';
-        operatorCount += 1;
-    } else {
-        calculate();
-        operator = "-";
-        operand1 = parseInt(inputTextBox.textContent);
-        repeatedOperator = true;
-    }
+    if (errorMessage == false) {
+        if (operatorCount < 1) {
+            operator = "-";
+            operand1 = parseInt(inputTextBox.textContent);
+            inputTextBox.textContent = '';
+            operatorCount += 1;
+        } else {
+            calculate();
+            operator = "-";
+            operand1 = parseInt(inputTextBox.textContent);
+            chainedOperators = true;
+        };
+    };
 });
 
 multiplyButton.addEventListener('click', () => {
-    numCount = 0;
-
-    if (operatorCount < 1) {
-        operator = "*";
-
-        operand1 = parseInt(inputTextBox.textContent);
-        inputTextBox.textContent = '';
-        operatorCount += 1;
-    } else {
-        calculate();
-        operator = "*";
-        operand1 = parseInt(inputTextBox.textContent);
-        repeatedOperator = true;
+    if (errorMessage == false) {
+        if (operatorCount < 1) {
+            operator = "*";
+            operand1 = parseInt(inputTextBox.textContent);
+            inputTextBox.textContent = '';
+            operatorCount += 1;
+        } else {
+            calculate();
+            operator = "*";
+            operand1 = parseInt(inputTextBox.textContent);
+            chainedOperators = true;
+        };
     };
 });
 
 divideButton.addEventListener('click', () => {
-    numCount = 0;
-
-    if (operatorCount < 1) {
-        operator = "/";
-        
-        operand1 = parseInt(inputTextBox.textContent);
-        inputTextBox.textContent = '';
-        operatorCount += 1;
-    } else {
-        calculate();
-        operator = "/";
-        operand1 = parseInt(inputTextBox.textContent);
-        repeatedOperator = true;
+    if (errorMessage == false) {
+        if (operatorCount < 1) {
+            operator = "/";
+            operand1 = parseInt(inputTextBox.textContent);
+            inputTextBox.textContent = '';
+            operatorCount += 1;
+        } else {
+            calculate();
+            operator = "/";
+            operand1 = parseInt(inputTextBox.textContent);
+            chainedOperators = true;
+        };
     };
 });
 
 equalsButton.addEventListener('click', () => {
     calculate();
+    operatorCount = 0;
 });
 
 clearButton.addEventListener('click', () => {
     inputTextBox.textContent = '';
+    operator = '';
+    operand1 = undefined;
+    operand2 = undefined;
+    operatorCount = 0;
+    chainedOperators = false;
+    errorMessage = false;
 });
+
