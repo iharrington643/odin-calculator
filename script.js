@@ -21,6 +21,7 @@ let operand1 = 0;
 let operand2 = 0;
 let operator = "";
 let operatorCount = 0;
+let repeatedOperator = false;
 
 function add(num1, num2) {
     return num1 + num2;
@@ -63,12 +64,18 @@ function calculate() {
         inputTextBox.textContent = String(operate(operand1, operand2, operator));
     } else {
         inputTextBox.textContent = String((operate(operand1, operand2, operator).toFixed(3)));
-    }
+    };
 
     operatorCount = 0;
 };
 
 numberZeroButton.addEventListener('click', () => {
+    if (repeatedOperator == true) {
+        inputTextBox.textContent = '';
+        repeatedOperator = false;
+        numCount = 0;
+    }
+
     if (numCount < 10) {
         inputTextBox.append('0');
         numCount += 1;
@@ -76,6 +83,12 @@ numberZeroButton.addEventListener('click', () => {
 });
 
 numberOneButton.addEventListener('click', () => {
+    if (repeatedOperator == true) {
+        inputTextBox.textContent = '';
+        repeatedOperator = false;
+        numCount = 0;
+    }
+
     if (numCount < 10) {
         inputTextBox.append('1');
         numCount += 1;
@@ -83,6 +96,12 @@ numberOneButton.addEventListener('click', () => {
 });
 
 numberTwoButton.addEventListener('click', () => {
+    if (repeatedOperator == true) {
+        inputTextBox.textContent('');
+        repeatedOperator = false;
+        numCount = 0;
+    }
+
     if (numCount < 10) {
         inputTextBox.append('2');
         numCount += 1;
@@ -90,6 +109,12 @@ numberTwoButton.addEventListener('click', () => {
 });
 
 numberThreeButton.addEventListener('click', () => {
+    if (repeatedOperator == true) {
+        inputTextBox.textContent = '';
+        repeatedOperator = false;
+        numCount = 0;
+    }
+
     if (numCount < 10) {
         inputTextBox.append('3');
         numCount += 1;
@@ -97,6 +122,12 @@ numberThreeButton.addEventListener('click', () => {
 });
 
 numberFourButton.addEventListener('click', () => {
+    if (repeatedOperator == true) {
+        inputTextBox.textContent = '';
+        repeatedOperator = false;
+        numCount = 0;
+    }
+
     if (numCount < 10) {
         inputTextBox.append('4');
         numCount += 1;
@@ -104,6 +135,12 @@ numberFourButton.addEventListener('click', () => {
 });
 
 numberFiveButton.addEventListener('click', () => {
+    if (repeatedOperator == true) {
+        inputTextBox.textContent = '';
+        repeatedOperator = false;
+        numCount = 0;
+    }
+
     if (numCount < 10) {
         inputTextBox.append('5');
         numCount += 1;
@@ -111,6 +148,12 @@ numberFiveButton.addEventListener('click', () => {
 });
 
 numberSixButton.addEventListener('click', () => {
+    if (repeatedOperator == true) {
+        inputTextBox.textContent = '';
+        repeatedOperator = false;
+        numCount = 0;
+    }
+
     if (numCount < 10) {
         inputTextBox.append('6');
         numCount += 1;
@@ -118,6 +161,12 @@ numberSixButton.addEventListener('click', () => {
 });
 
 numberSevenButton.addEventListener('click', () => {
+    if (repeatedOperator == true) {
+        inputTextBox.textContent = '';
+        repeatedOperator = false;
+        numCount = 0;
+    }
+
     if (numCount < 10) {
         inputTextBox.append('7');
         numCount += 1;
@@ -125,6 +174,12 @@ numberSevenButton.addEventListener('click', () => {
 });
 
 numberEightButton.addEventListener('click', () => {
+    if (repeatedOperator == true) {
+        inputTextBox.textContent = '';
+        repeatedOperator = false;
+        numCount = 0;
+    }
+
     if (numCount < 10) {
         inputTextBox.append('8');
         numCount += 1;
@@ -132,6 +187,12 @@ numberEightButton.addEventListener('click', () => {
 });
 
 numberNineButton.addEventListener('click', () => {
+    if (repeatedOperator == true) {
+        inputTextBox.textContent = '';
+        repeatedOperator = false;
+        numCount = 0;
+    }
+
     if (numCount < 10) {
         inputTextBox.append('9');
         numCount += 1;
@@ -139,65 +200,76 @@ numberNineButton.addEventListener('click', () => {
 });
 
 addButton.addEventListener('click', () => {
-    operator = "+";
+    numCount = 0;
 
     if (operatorCount < 1) {
-        numCount = 0;
+        operator = "+";
 
         operand1 = parseInt(inputTextBox.textContent);
         inputTextBox.textContent = '';
         operatorCount += 1;
     } else {
         calculate();
+        operator = "+";
+        operand1 = parseInt(inputTextBox.textContent);
+        repeatedOperator = true;
     }
 });
 
 subtractButton.addEventListener('click', () => {
-    operator = "-";
     numCount = 0;
 
     if (operatorCount < 1) {
-        numCount = 0;
+        operator = "-";
 
         operand1 = parseInt(inputTextBox.textContent);
         inputTextBox.textContent = '';
         operatorCount += 1;
     } else {
         calculate();
+        operator = "-";
+        operand1 = parseInt(inputTextBox.textContent);
+        repeatedOperator = true;
     }
 });
 
 multiplyButton.addEventListener('click', () => {
-    operator = "*";
     numCount = 0;
 
     if (operatorCount < 1) {
-        numCount = 0;
+        operator = "*";
 
         operand1 = parseInt(inputTextBox.textContent);
         inputTextBox.textContent = '';
         operatorCount += 1;
     } else {
         calculate();
+        operator = "*";
+        operand1 = parseInt(inputTextBox.textContent);
+        repeatedOperator = true;
     };
 });
 
 divideButton.addEventListener('click', () => {
-    operator = "/";
     numCount = 0;
 
     if (operatorCount < 1) {
-        numCount = 0;
+        operator = "/";
         
         operand1 = parseInt(inputTextBox.textContent);
         inputTextBox.textContent = '';
         operatorCount += 1;
     } else {
         calculate();
+        operator = "/";
+        operand1 = parseInt(inputTextBox.textContent);
+        repeatedOperator = true;
     };
 });
 
-equalsButton.addEventListener('click', calculate);
+equalsButton.addEventListener('click', () => {
+    calculate();
+});
 
 clearButton.addEventListener('click', () => {
     inputTextBox.textContent = '';
