@@ -21,7 +21,6 @@ let operand2 = undefined;
 let operator = "";
 let operatorCount = 0;
 let chainedOperators = false;
-let errorMessage = false;
 
 function add(num1, num2) {
     return num1 + num2;
@@ -58,29 +57,25 @@ function operate(num1, num2, sign) {
 function calculate() {
     numCount = 0;
 
+    if (operand1 === undefined) {
+        return;
+    };
+
     if (inputTextBox.textContent != '') {
         operand2 = parseInt(inputTextBox.textContent);
     } else {
         operand2 = undefined;
     };
-    
-    if (operand1 == undefined) {
-        return;
-    };
 
     if (Number.isInteger(operate(operand1, operand2, operator))) {
         inputTextBox.textContent = String(operate(operand1, operand2, operator));
     } else if (operate(operand1, operand2, operator) === undefined) {
-        inputTextBox.textContent = "Error: Cannot Divide by Zero";
-        inputTextBox.style.fontSize = "30px";
-        errorMessage = true;
+        alert("Error: Cannot divide by zero.")
         operand1 = 0;
         operand2 = 0;
         operator = "";
     } else if (Number.isNaN(operate(operand1, operand2, operator))) {
-        inputTextBox.textContent = "Error: Incomplete Equation";
-        inputTextBox.style.fontSize = "30px";
-        errorMessage = true;
+        alert("Error: Incomplete equation.")
         operand1 = 0;
         operand2 = 0;
         operator = "";
@@ -97,11 +92,6 @@ numberZeroButton.addEventListener('click', () => {
         chainedOperators = false;
     };
 
-    if (errorMessage == true) {
-        inputTextBox.textContent = '';
-        errorMessage = false;
-    };
-
     if (inputTextBox.textContent.length < 10) {
         inputTextBox.append('0');
     }
@@ -113,11 +103,6 @@ numberOneButton.addEventListener('click', () => {
     if (chainedOperators == true) {
         inputTextBox.textContent = '';
         chainedOperators = false;
-    };
-
-    if (errorMessage == true) {
-        inputTextBox.textContent = '';
-        errorMessage = false;
     };
 
     if (inputTextBox.textContent.length < 10) {
@@ -133,11 +118,6 @@ numberTwoButton.addEventListener('click', () => {
         chainedOperators = false;
     };
 
-    if (errorMessage == true) {
-        inputTextBox.textContent = '';
-        errorMessage = false;
-    };
-
     if (inputTextBox.textContent.length < 10) {
         inputTextBox.append('2');
     }
@@ -149,11 +129,6 @@ numberThreeButton.addEventListener('click', () => {
     if (chainedOperators == true) {
         inputTextBox.textContent = '';
         chainedOperators = false;
-    };
-
-    if (errorMessage == true) {
-        inputTextBox.textContent = '';
-        errorMessage = false;
     };
 
     if (inputTextBox.textContent.length < 10) {
@@ -169,11 +144,6 @@ numberFourButton.addEventListener('click', () => {
         chainedOperators = false;
     };
 
-    if (errorMessage == true) {
-        inputTextBox.textContent = '';
-        errorMessage = false;
-    };
-
     if (inputTextBox.textContent.length < 10) {
         inputTextBox.append('4');
     }
@@ -185,11 +155,6 @@ numberFiveButton.addEventListener('click', () => {
     if (chainedOperators == true) {
         inputTextBox.textContent = '';
         chainedOperators = false;
-    };
-
-    if (errorMessage == true) {
-        inputTextBox.textContent = '';
-        errorMessage = false;
     };
 
     if (inputTextBox.textContent.length < 10) {
@@ -205,11 +170,6 @@ numberSixButton.addEventListener('click', () => {
         chainedOperators = false;
     };
 
-    if (errorMessage == true) {
-        inputTextBox.textContent = '';
-        errorMessage = false;
-    };
-
     if (inputTextBox.textContent.length < 10) {
         inputTextBox.append('6');
     }
@@ -221,11 +181,6 @@ numberSevenButton.addEventListener('click', () => {
     if (chainedOperators == true) {
         inputTextBox.textContent = '';
         chainedOperators = false;
-    };
-
-    if (errorMessage == true) {
-        inputTextBox.textContent = '';
-        errorMessage = false;
     };
 
     if (inputTextBox.textContent.length < 10) {
@@ -254,78 +209,53 @@ numberNineButton.addEventListener('click', () => {
         chainedOperators = false;
     };
 
-    if (errorMessage == true) {
-        inputTextBox.textContent = '';
-        errorMessage = false;
-    };
-
     if (inputTextBox.textContent.length < 10) {
         inputTextBox.append('9');
     }
 });
 
 addButton.addEventListener('click', () => {
-    if (errorMessage == false) {
-        if (operatorCount < 1) {
-            operator = "+";
-            operand1 = parseInt(inputTextBox.textContent);
-            inputTextBox.textContent = '';
-            operatorCount += 1;
-        } else {
+        if (operator !== "" && operand1 !== undefined) {
             calculate();
-            operator = "+";
-            operand1 = parseInt(inputTextBox.textContent);
-            chainedOperators = true;
         };
-    };
+
+        operator = "+";
+        operand1 = parseInt(inputTextBox.textContent);
+        inputTextBox.textContent = "";
+        chainedOperators = true;
 });
 
 subtractButton.addEventListener('click', () => {
-    if (errorMessage == false) {
-        if (operatorCount < 1) {
-            operator = "-";
-            operand1 = parseInt(inputTextBox.textContent);
-            inputTextBox.textContent = '';
-            operatorCount += 1;
-        } else {
+        if (operator !== "" && operand1 !== undefined) {
             calculate();
-            operator = "-";
-            operand1 = parseInt(inputTextBox.textContent);
-            chainedOperators = true;
         };
-    };
+
+        operator = "-";
+        operand1 = parseInt(inputTextBox.textContent);
+        inputTextBox.textContent = "";
+        chainedOperators = true;
 });
 
 multiplyButton.addEventListener('click', () => {
-    if (errorMessage == false) {
-        if (operatorCount < 1) {
-            operator = "*";
-            operand1 = parseInt(inputTextBox.textContent);
-            inputTextBox.textContent = '';
-            operatorCount += 1;
-        } else {
+        if (operator !== "" && operand1 !== undefined) {
             calculate();
-            operator = "*";
-            operand1 = parseInt(inputTextBox.textContent);
-            chainedOperators = true;
         };
-    };
+
+        operator = "*";
+        operand1 = parseInt(inputTextBox.textContent);
+        inputTextBox.textContent = "";
+        chainedOperators = true;
 });
 
 divideButton.addEventListener('click', () => {
-    if (errorMessage == false) {
-        if (operatorCount < 1) {
-            operator = "/";
-            operand1 = parseInt(inputTextBox.textContent);
-            inputTextBox.textContent = '';
-            operatorCount += 1;
-        } else {
+        if (operator !== "" && operand1 !== undefined) {
             calculate();
-            operator = "/";
-            operand1 = parseInt(inputTextBox.textContent);
-            chainedOperators = true;
         };
-    };
+
+        operator = "/";
+        operand1 = parseInt(inputTextBox.textContent);
+        inputTextBox.textContent = "";
+        chainedOperators = true;
 });
 
 equalsButton.addEventListener('click', () => {
@@ -340,6 +270,5 @@ clearButton.addEventListener('click', () => {
     operand2 = undefined;
     operatorCount = 0;
     chainedOperators = false;
-    errorMessage = false;
 });
 
